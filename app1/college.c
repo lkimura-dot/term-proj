@@ -1,0 +1,36 @@
+/*
+ * File: college.c
+ * Author: Lauren Kimura
+ * Last updated: 2/22/2026
+ * Description: has a main function that creates a dataset
+ *
+ */
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include "dataset.h"
+
+#define MAX_STUDENTS 3000
+#define MIN_AGE 18
+#define MAX_AGE 30
+#define AGE_RANGE (MAX_AGE - MIN_AGE + 1)
+
+int main() {
+        srand(time(NULL));
+        AGE *studAge[AGE_RANGE]; // 0 = Age:18, 12=Age:3
+		int age = rand() % AGE_RANGE + MIN_AGE;
+        STUDENT->ID = random;
+        for (int i = 1; i < 1000; i++) {
+            int randomID = randomID + rand()%2+1;
+            int randomAge = rand() % AGE_RANGE + MIN_AGE;
+            STUDENT newStudent = malloc(sizeof(STUDENT);
+			assert(newStudent != NULL);
+			newStudent->ID = randomID;
+			newStudent->age = randomAge;
+			insert(newStudent)studAge[randomAge-MIN_AGE] = 
+
+			STUDENT
+
+        }
+}

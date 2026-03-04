@@ -72,13 +72,18 @@ void destroyDataSet(LIST *lp)
 	return;
 }
 int* searchAge(LIST *lp, int age)
-{
-	int startingVal = age-18
+{	
+	assert(lp != NULL);
+	int startingVal = age-18;
+	if (lp->array[startingVal]->count == 0) {
+		printf("No students of age: %d", age);
+		return;
+	}
 	int *agesFound[lp->array[startingVal]->count];
-	while(int i = 0; i < lp->array[startingVal]->count; i++){
+	for(int i = 0; i < lp->array[startingVal]->count; i++){
 		agesFound[i] = lp->array[startingVal]->head->next;
+		printf("Students who are of age: %d", age);
 		printf("Student Id: %d\n", lp->array[startingVal]->head->next);
-
 	}
 
 
@@ -100,12 +105,37 @@ void insertion(LIST *lp, int newID, int newAge)
 	return;
 }
 
-void deletion (LIST *lp)
+void deletion (LIST *lp, int age)
 {
+	assert(lp!= NULL);
+	int startingVal = age-18;
+	if (lp->array[startingVal]->count == 0) {
+		print("no student with age: %d", age);
+		return;
+	}
+	for (int i = 0; i < lp->array[startingVal]->count; i++) {
+		printf("Students who were deleted:");
+		printf("Student Id: %d\n", lp->array[startingVal]->head->next);
+		free(lp->array[startingVal]->head->next);
+		lp->studentCount--;
+	}
+	lp->array[startingVal]->count = 0;
+	lp->array[startingVal]->head->next = lp->array[startingVal]->head;
+	lp->array[startingVal]->head->prev = lep->array[startingVal]->head;
 	return;
 }
 
 void maxAgeGap(LIST *lp)
 {
+	int lowAge = 0;
+	int topAge = 13;
+	while (lp->array[lowAge]->count == 0) {
+		lowAge++;
+	}
+	while (lp->array[topAge]->count ==0) {
+		topAge--;
+	}
+	printf("thr age range is from %d and %d", lowAge+18, topAge+18);
+	assert(lp != NULL);
 	return;
 }

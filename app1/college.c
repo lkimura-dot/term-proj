@@ -18,19 +18,13 @@
 
 int main() {
         srand(time(NULL));
+		LIST *studentList = createDataSet[3000];
         AGE *studAge[AGE_RANGE]; // 0 = Age:18, 12=Age:3
 		int age = rand() % AGE_RANGE + MIN_AGE;
         STUDENT->ID = random;
         for (int i = 1; i < 1000; i++) {
             int randomID = randomID + rand()%2+1;
             int randomAge = rand() % AGE_RANGE + MIN_AGE;
-            STUDENT newStudent = malloc(sizeof(STUDENT);
-			assert(newStudent != NULL);
-			newStudent->ID = randomID;
-			newStudent->age = randomAge;
-			insert(newStudent)studAge[randomAge-MIN_AGE] = 
-
-			STUDENT
-
+          	insert(studentList, randomID, randomAge);
         }
 }

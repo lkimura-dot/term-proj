@@ -13,6 +13,16 @@
 #include <stdbool.h>
 #include "dataset.h"
 
+/*
+ * Define a student of a certain age with an ID pointing to next and prev
+ */
+typedef struct student
+{
+    int ID;
+	int age;
+    struct student *next;
+    struct student *prev;
+} STUDENT;
 
 /*
  * Defines ages in which the list will have that had a dummy head and count of amount of students
@@ -22,17 +32,6 @@ typedef struct ages
     int count;
 	STUDENT *head;
 } AGES;
-
-/*
- * Define a student of a certain age with an ID pointing to next and prev
- */
-typedef struct student
-{
-    int ID;
-	int age;
-    struct node *next;
-    struct node *prev;
-} STUDENT;
 
 
 /*
@@ -50,9 +49,9 @@ LIST *createDataSet(int maxElts)
     assert(lp != NULL);
     lp->studentCount = 0;
 	lp->length = maxElts;
+	lp->array = malloc(sizeof(AGES*) * 13);
+	assert(lp->array != NULL);
 	for(int i=0; i<13; i++) {
-		lp->array[i] = malloc(sizeof(AGES));
-		assert(lp->array[i]!= NULL);
 		lp->array[i]->count = 0;
 		lp->array[i]->head = malloc(sizeof(STUDENT));
 		assert(lp->array[i]->head != NULL);
@@ -68,10 +67,10 @@ void destroyDataSet(LIST *lp)
 	for(int i = 0; i < 13; i++) {
 		free(lp->array[i]);
 	}
-	free(lp)
+	free(lp);
 	return;
 }
-int* searchAge(LIST *lp, int age)
+void searchAge(LIST *lp, int age)
 {	
 	assert(lp != NULL);
 	int startingVal = age-18;
@@ -79,16 +78,13 @@ int* searchAge(LIST *lp, int age)
 		printf("No students of age: %d", age);
 		return;
 	}
-	int *agesFound[lp->array[startingVal]->count];
 	for(int i = 0; i < lp->array[startingVal]->count; i++){
-		agesFound[i] = lp->array[startingVal]->head->next;
 		printf("Students who are of age: %d", age);
-		printf("Student Id: %d\n", lp->array[startingVal]->head->next);
+		printf("Student Id: %d\n", lp->array[startingVal]->head->next->ID);
 	}
-
-
-	return agesFound;
+	return;
 }
+
 void insertion(LIST *lp, int newID, int newAge)
 {
 	assert(lp != NULL && lp->studentCount < lp->length);
@@ -96,32 +92,32 @@ void insertion(LIST *lp, int newID, int newAge)
 	assert(newStudent != NULL);
 	newStudent -> age = newAge;
 	newStudent ->ID = newID;
-	lp->array[age-18]->head->next->prev = newStudent;
-	newStudent->prev = head;
-	newStudent->next = lp->array[age-18]->next;
-	lp->array[age-18]->head->next = newStudent;
+	lp->array[newAge-18]->head->next->prev = newStudent;
+	newStudent->prev = lp->array[newAge-18]->head;
+	newStudent->next = lp->array[newAge-18]->head->next;
+	lp->array[newAge-18]->head->next = newStudent;
 	lp->studentCount++;
-	printf("new student added: %d, who is %d ", newStudent->ID, newstudent->age);
+	printf("new student added: %d, who is %d ", newStudent->ID, newStudent->age);
 	return;
 }
 
-void deletion (LIST *lp, int age)
+void deletion (LIST *lp, int delAge)
 {
 	assert(lp!= NULL);
-	int startingVal = age-18;
+	int startingVal = delAge-18;
 	if (lp->array[startingVal]->count == 0) {
-		print("no student with age: %d", age);
+		printf("no student with age: %d", delAge);
 		return;
 	}
 	for (int i = 0; i < lp->array[startingVal]->count; i++) {
 		printf("Students who were deleted:");
-		printf("Student Id: %d\n", lp->array[startingVal]->head->next);
+		printf("Student Id: %d\n", lp->array[startingVal]->head->next->ID);
 		free(lp->array[startingVal]->head->next);
 		lp->studentCount--;
 	}
 	lp->array[startingVal]->count = 0;
 	lp->array[startingVal]->head->next = lp->array[startingVal]->head;
-	lp->array[startingVal]->head->prev = lep->array[startingVal]->head;
+	lp->array[startingVal]->head->prev = lp->array[startingVal]->head;
 	return;
 }
 

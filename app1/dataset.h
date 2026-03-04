@@ -10,11 +10,16 @@
 # ifndef DATASET_H
 # define DATASET_H
 
+typedef struct student STUDENT;
+typedef struct ages AGES;
 typedef struct list LIST;
 
-extern LIST *createDataSet(int (*compare)());
+extern LIST *createDataSet(int maxElts);
 extern void destroyDataSet(LIST *lp);
-extern int *searchAge(LIST *lp);
-extern void insertion(LIST *lp);
-extern void deletion (LIST *lp);
+extern void searchAge(LIST *lp, int age);
+extern void insertion(LIST *lp, int newID, int newAge);
+extern void deletion (LIST *lp, int age);
 extern void maxAgeGap(LIST *lp);
+
+
+#endif

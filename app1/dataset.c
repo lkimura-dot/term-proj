@@ -51,25 +51,29 @@ LIST *createDataSet(int maxElts)
 	lp->length = maxElts;
 	lp->array = malloc(sizeof(AGES*) * 13);
 	assert(lp->array != NULL);
-	for(int i=0; i<13; i++) {
+	for(int i = 0; i < 13; i++) {
+		lp->array[i] = malloc(sizeof(AGES));
+		assert(lp->array[i] != NULL);
 		lp->array[i]->count = 0;
-		lp->array[i]->head = malloc(sizeof(STUDENT));
+		lp->array[i]->head = malloc(sizeof(STUDENT)); 
 		assert(lp->array[i]->head != NULL);
 		lp->array[i]->head->next = lp->array[i]->head;
 		lp->array[i]->head->prev = lp->array[i]->head;
-	}
-    return lp;
+	}    
+	return lp;
 }
 
 //o complexity: O(m)
 void destroyDataSet(LIST *lp)
 {
 	for(int i = 0; i < 13; i++) {
-		free(lp->array[i]);
+    free(lp->array[i]->head);
+    free(lp->array[i]); 
 	}
+	free(lp->array);
 	free(lp);
-	return;
 }
+
 void searchAge(LIST *lp, int age)
 {	
 	assert(lp != NULL);
@@ -78,8 +82,8 @@ void searchAge(LIST *lp, int age)
 		printf("No students of age: %d", age);
 		return;
 	}
+	printf("Students who are of age: %d", age);
 	for(int i = 0; i < lp->array[startingVal]->count; i++){
-		printf("Students who are of age: %d", age);
 		printf("Student Id: %d\n", lp->array[startingVal]->head->next->ID);
 	}
 	return;
@@ -97,7 +101,7 @@ void insertion(LIST *lp, int newID, int newAge)
 	newStudent->next = lp->array[newAge-18]->head->next;
 	lp->array[newAge-18]->head->next = newStudent;
 	lp->studentCount++;
-	printf("new student added: %d, who is %d ", newStudent->ID, newStudent->age);
+	printf("new student added: %d, who is %d \n", newStudent->ID, newStudent->age);
 	return;
 }
 

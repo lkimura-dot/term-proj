@@ -15,7 +15,7 @@ typedef struct list LIST;
 
 extern LIST *createDataSet(int maxElts);
 extern void destroyDataSet(LIST *lp);
-extern void searchID(LIST *lp, int id);
+extern int searchID(LIST *lp, int id);
 extern void insertion(LIST *lp, int newID, int newAge);
 extern void deletion (LIST *lp, int age);
 

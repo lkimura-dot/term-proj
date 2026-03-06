@@ -50,7 +50,7 @@ LIST *createDataSet(int maxElts)
 	assert(lp != NULL);
 	for(int i = 0; i < maxElts; i++) {
 		lp->slp[i] = malloc(sizeof(STUDENT));
-		lassert(lp->slp[i] != NULL);
+		assert(lp->slp[i] != NULL);
 	}
 	return lp;
 }
@@ -114,7 +114,7 @@ void insertion(LIST *lp, int newId, int newAge)
 	lp->slp[newId]->id = newId;
 	lp->slp[newId]->age = newAge;
 	printf("New student added with ID: %d\n", newId);
-	count++;
+	lp->count++;
 	return;
 }
 
@@ -130,7 +130,12 @@ void insertion(LIST *lp, int newId, int newAge)
 void deletion (LIST *lp, int delId)
 {
 	assert(lp!= NULL);
-
+	if (lp->slp[delId]->id != delId) {
+		printf("Student %d could nto  be deleted\n", delId);
+		return;
+	}
+	free(lp->slp[delId]);
+	lp->count--;
 	return;
 }
 

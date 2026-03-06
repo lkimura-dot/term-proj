@@ -2,7 +2,7 @@
  * File: dataset.c
  * Author: Lauren Kimura
  * Last updated: 3/5/2026
- * Description:
+ * Description: This 
  *
  */
 
@@ -14,7 +14,7 @@
 #include "dataset.h"
 
 /*
- * Define a student of a certain age with an ID pointing to next and prev
+ * Defines a student of a certain age with an ID pointing to next and prev
  */
 typedef struct student
 {
@@ -90,10 +90,10 @@ int searchID(LIST *lp, int findId)
 {	
 	assert(lp != NULL);
 	if (lp->slp[findId]->id != findId) {
-		printf("No student with id: %d", findId);
+		printf("No student with id: %d\n", findId);
 		return -1;
 	}
-	printf("Student found!");
+	printf("Student %d found!\n", findId);
 	return lp->slp[findId]->id;
 }
 
@@ -130,12 +130,14 @@ void insertion(LIST *lp, int newId, int newAge)
 void deletion (LIST *lp, int delId)
 {
 	assert(lp!= NULL);
-	if (lp->slp[delId]->id != delId) {
-		printf("Student %d could nto  be deleted\n", delId);
+	if (lp->slp[delId] == NULL || lp->slp[delId]->id != delId) {
+		printf("Student %d could not be deleted, not in list\n", delId);
 		return;
 	}
 	free(lp->slp[delId]);
+	lp->slp[delId] = NULL;
 	lp->count--;
+	printf("deleted student %d\n", delId);
 	return;
 }
 

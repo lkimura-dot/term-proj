@@ -2,8 +2,8 @@
  * File: college.c
  * Author: Lauren Kimura
  * Last updated: 3/6/2026
- * Description: has a main function that creates an array 
- *
+ * Description: has a main function that creates a list of 3000 students and calls a random age + random ID, then calls the functions in dataset.c 
+ * 
  */
 #include <stdlib.h>
 #include <stdio.h>

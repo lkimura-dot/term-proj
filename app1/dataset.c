@@ -1,8 +1,8 @@
 /*
  * File: dataset.c
  * Author: Lauren Kimura
- * Last updated: 2/22/2026
- * Description:
+ * Last updated: 3/5/2026
+ * Description: a list of size 12, students sorted by age with a dummy head for ages 18-30. In each age there is a node pointer student that is doubly linked using ADT's
  *
  */
 
@@ -102,7 +102,8 @@ void destroyDataSet(LIST *lp)
  * Worst Case: O(m)
  *
  * The searchAge function takes one lp and an age as arguments. If there is not student with that age, it returns. Else, it prints out all the student's ID's with that age and reutns nothing
- *
+ *It makes a copy of the elements in the list and returns the copy of items.
+
  */
 void searchAge(LIST *lp, int age)
 {	

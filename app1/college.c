@@ -1,8 +1,8 @@
 /*
  * File: college.c
  * Author: Lauren Kimura
- * Last updated: 2/22/2026
- * Description: has a main function that creates a dataset
+ * Last updated: 3/5/2026
+ * Description: has a main function that creates a list of 3000 stuents and calls a random age + random ID, then calls the functions in dataset.c
  *
  */
 #include <stdlib.h>

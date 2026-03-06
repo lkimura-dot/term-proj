@@ -1,7 +1,7 @@
 /*
  * File: dataset.h
- * Author
- * Last Updated: 2 March 2026
+ * Author: Lauren Kimura
+ * Last Updated: 3/2/2026
  *
  * Description: This file contains the public function and type
  *              declarations for a list abstract data type for generic

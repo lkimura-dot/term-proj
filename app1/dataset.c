@@ -74,13 +74,13 @@ LIST *createDataSet(int maxElts)
 }
 
 /*
- * Big-O: O(m)
+ * Big-O: O(m), m is the differant types of ages in array
  *
- * Average: O(1)
+ * Average: O(m)
  *
- * Worst case: O(1)
+ * Worst case: O(m)
  *
- * The destroyQueue function takes in one pq as an argument. It free the data then frees the pointer iteself and returns nothing.
+ * The destroyDataSet function takes in one lq as an argument. It frees each of the age heads and AGES in the array, then frees the array itself, and finally the lp. This returns nothing.
  *
  */
 void destroyDataSet(LIST *lp)
@@ -94,6 +94,16 @@ void destroyDataSet(LIST *lp)
 	printf("Successfully deleted list\n");
 }
 
+/*
+ * Big-O: O(m) m is the differant types of ages in array
+ *
+ * Average: O(m), getting age O(1), but returning each ID is O(m)
+ *
+ * Worst Case: O(m)
+ *
+ * The searchAge function takes one lp and an age as arguments. If there is not student with that age, it returns. Else, it prints out all the student's ID's with that age and reutns nothing
+ *
+ */
 void searchAge(LIST *lp, int age)
 {	
 	assert(lp != NULL);
@@ -113,6 +123,17 @@ void searchAge(LIST *lp, int age)
 		return;
 }
 
+
+/*
+ * Big-O: O(1)
+ *
+ * Average: O(1)
+ *
+ * Worst Case:O(1)
+ *
+ * The insertion function takes in one LIST lp, and int newId and one int newAge as arguments. It creates memory for the new stuent, then sets the students age to the newAge, and well as the ID to newId. It then adds the new student to the beginngin of the double linked list right after the head, incrementing count by 1. It prints out the new student, then returns nothing.
+ *
+ */
 void insertion(LIST *lp, int newID, int newAge)
 {
 	assert(lp != NULL && lp->studentCount < lp->length);
@@ -131,6 +152,15 @@ void insertion(LIST *lp, int newID, int newAge)
 	return;
 }
 
+/*
+ * Big-O: O(m), m is the differant types of ages in array 
+ * 
+ * Average: O(m)
+ *
+ * Worst Case: O(n), if all student have the same age, it will delete every STUDENT node
+ *
+ * The deletion function takes in one list of lp and one delAge as arguments. It checks the count of student with that AGE, and if none, returns. If there is a list of STUDENTS, there is a new created STUDENT that points to the first student in the list, and while the next pointer is not the head (reached end) will save the next pointer, then delete the student at first, setting the new student to the next saved. This returns nothing
+ */
 void deletion (LIST *lp, int delAge)
 {
 	assert(lp!= NULL);
@@ -153,6 +183,15 @@ void deletion (LIST *lp, int delAge)
 	return;
 }
 
+/*
+ * Big-O: O(1) 
+ *
+ * Average: O(1)
+ *
+ * Worst Case: O(m) m is the differant types of ages in array (occurs if there is no students in array)
+ *
+ * The maxAgeGap function takes in one list of lp as arguments. It checks for the lowest age and the top age. then prints the range of the two. Ths returns nothing.
+ */
 void maxAgeGap(LIST *lp)
 {
 	assert(lp != NULL);

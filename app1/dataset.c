@@ -2,7 +2,8 @@
  * File: dataset.c
  * Author: Lauren Kimura
  * Last updated: 3/5/2026
- * Description: a list of size 12, students sorted by age with a dummy head for ages 18-30. In each age there is a node pointer student that is doubly linked using ADT's
+ * Description: a list of size 12, students sorted by age with a dummy head for ages 18-30. In each age there is a node pointer student that is doubly linked using ADT's: createDataSet, destoryDataSet, SearchAge, Insertion, Deletion, and maxAgeGroup
+ *
  *
  */
 

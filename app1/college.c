@@ -26,4 +26,7 @@ int main() {
             randomAge = rand() % AGE_RANGE + MIN_AGE;
           	insertion(studentList, randomID, randomAge);
         }
+		searchAge(studentList, 20);
+
+		destroyDataSet(studentList);
 }

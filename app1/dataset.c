@@ -72,6 +72,7 @@ void destroyDataSet(LIST *lp)
 	}
 	free(lp->array);
 	free(lp);
+	printf("Successfully deleted list\n");
 }
 
 void searchAge(LIST *lp, int age)
@@ -92,6 +93,7 @@ void searchAge(LIST *lp, int age)
 void insertion(LIST *lp, int newID, int newAge)
 {
 	assert(lp != NULL && lp->studentCount < lp->length);
+	assert(newAge >= 18 && newAge <=30);
 	STUDENT* newStudent = malloc(sizeof(STUDENT));
 	assert(newStudent != NULL);
 	newStudent -> age = newAge;
@@ -100,6 +102,7 @@ void insertion(LIST *lp, int newID, int newAge)
 	newStudent->prev = lp->array[newAge-18]->head;
 	newStudent->next = lp->array[newAge-18]->head->next;
 	lp->array[newAge-18]->head->next = newStudent;
+	lp->array[newAge-18]->count++;
 	lp->studentCount++;
 	printf("new student added: %d, who is %d \n", newStudent->ID, newStudent->age);
 	return;
@@ -110,18 +113,20 @@ void deletion (LIST *lp, int delAge)
 	assert(lp!= NULL);
 	int startingVal = delAge-18;
 	if (lp->array[startingVal]->count == 0) {
-		printf("no student with age: %d", delAge);
+		printf("no student with age: %d \n", delAge);
 		return;
 	}
-	for (int i = 0; i < lp->array[startingVal]->count; i++) {
-		printf("Students who were deleted:");
-		printf("Student Id: %d\n", lp->array[startingVal]->head->next->ID);
-		free(lp->array[startingVal]->head->next);
+	STUDENT *delete = lp->array[startingVal]->head->next;
+	printf("Students Deleted:\n");
+	while (delete != lp->array[startingVal]->head) {
+		STUDENT *saveNext = delete->next; 
+		printf("Student Id: %d\n", delete->ID);
+		delete->prev->next = delete->next;
+		delete->next->prev = delete->prev;
+		free(delete);
 		lp->studentCount--;
+		delete = saveNext;
 	}
-	lp->array[startingVal]->count = 0;
-	lp->array[startingVal]->head->next = lp->array[startingVal]->head;
-	lp->array[startingVal]->head->prev = lp->array[startingVal]->head;
 	return;
 }
 

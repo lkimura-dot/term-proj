@@ -18,7 +18,7 @@
  */
 typedef struct student
 {
-    int ID;
+    int id;
 	int age;
 } STUDENT;
 
@@ -26,7 +26,7 @@ typedef struct student
  * Defines an List where the ages are stored, with a max length and current student count.
  */
 typedef struct list{
-  STUDENT **array;
+  STUDENT **slp;
   int count;
   int length;
 } LIST;
@@ -44,7 +44,14 @@ LIST *createDataSet(int maxElts)
 {
 	LIST *lp = malloc(sizeof(LIST));
     assert(lp != NULL);
-	lp->array = malloc(sizeof(AGES*) * maxElts;
+	lp->length = maxElts;
+	lp->count = 0;
+	lp->slp = malloc(sizeof(STUDENT*)*maxElts);
+	assert(lp != NULL);
+	for(int i = 0; i < maxElts; i++) {
+		lp->slp[i] = malloc(sizeof(STUDENT));
+		lassert(lp->slp[i] != NULL);
+	}
 	return lp;
 }
 
@@ -60,11 +67,11 @@ LIST *createDataSet(int maxElts)
  */
 void destroyDataSet(LIST *lp)
 {
-	for(int i = 0; i < 13; i++) {
-    free(lp->array[i]->head);
-    free(lp->array[i]); 
+	assert(lp != NULL);
+	for(int i = 0; i < lp->length; i++) {
+		free(lp->slp[i]); 
 	}
-	free(lp->array);
+	free(lp->slp);
 	free(lp);
 	printf("Successfully deleted list\n");
 }
@@ -79,23 +86,15 @@ void destroyDataSet(LIST *lp)
  * The searchAge function takes one lp and an age as arguments. If there is not student with that age, it returns. Else, it prints out all the student's ID's with that age and reutns nothing
  *
  */
-void searchAge(LIST *lp, int age)
+int searchID(LIST *lp, int findId)
 {	
 	assert(lp != NULL);
-	int startingVal = age-18;
-	if (lp->array[startingVal]->count == 0) {
-		printf("No students of age: %d\n", age);
-		return;
+	if (lp->slp[findId]->id != findId) {
+		printf("No student with id: %d", findId);
+		return -1;
 	}
-	printf("Students who are of age: %d\n", age);
-	STUDENT *curr = lp->array[startingVal]->head->next;
-	
-
-	while (curr != lp->array[startingVal]->head) {
-        printf("Student Id: %d\n", curr->ID);
-        curr = curr->next;
-    }
-		return;
+	printf("Student found!");
+	return lp->slp[findId]->id;
 }
 
 
@@ -109,21 +108,13 @@ void searchAge(LIST *lp, int age)
  * The insertion function takes in one LIST lp, and int newId and one int newAge as arguments. It creates memory for the new stuent, then sets the students age to the newAge, and well as the ID to newId. It then adds the new student to the beginngin of the double linked list right after the head, incrementing count by 1. It prints out the new student, then returns nothing.
  *
  */
-void insertion(LIST *lp, int newID, int newAge)
+void insertion(LIST *lp, int newId, int newAge)
 {
-	assert(lp != NULL && lp->studentCount < lp->length);
-	assert(newAge >= 18 && newAge <=30);
-	STUDENT* newStudent = malloc(sizeof(STUDENT));
-	assert(newStudent != NULL);
-	newStudent -> age = newAge;
-	newStudent ->ID = newID;
-	lp->array[newAge-18]->head->next->prev = newStudent;
-	newStudent->prev = lp->array[newAge-18]->head;
-	newStudent->next = lp->array[newAge-18]->head->next;
-	lp->array[newAge-18]->head->next = newStudent;
-	lp->array[newAge-18]->count++;
-	lp->studentCount++;
-	printf("new student added: %d, who is %d \n", newStudent->ID, newStudent->age);
+	assert(lp != NULL && lp->count < lp ->length);
+	lp->slp[newId]->id = newId;
+	lp->slp[newId]->age = newAge;
+	printf("New student added with ID: %d\n", newId);
+	count++;
 	return;
 }
 
@@ -136,25 +127,10 @@ void insertion(LIST *lp, int newID, int newAge)
  *
  * The deletion function takes in one list of lp and one delAge as arguments. It checks the count of student with that AGE, and if none, returns. If there is a list of STUDENTS, there is a new created STUDENT that points to the first student in the list, and while the next pointer is not the head (reached end) will save the next pointer, then delete the student at first, setting the new student to the next saved. This returns nothing
  */
-void deletion (LIST *lp, int delAge)
+void deletion (LIST *lp, int delId)
 {
 	assert(lp!= NULL);
-	int startingVal = delAge-18;
-	if (lp->array[startingVal]->count == 0) {
-		printf("no student with age: %d \n", delAge);
-		return;
-	}
-	STUDENT *delete = lp->array[startingVal]->head->next;
-	printf("Students Deleted:\n");
-	while (delete != lp->array[startingVal]->head) {
-		STUDENT *saveNext = delete->next; 
-		printf("Student Id: %d\n", delete->ID);
-		delete->prev->next = delete->next;
-		delete->next->prev = delete->prev;
-		free(delete);
-		lp->studentCount--;
-		delete = saveNext;
-	}
+
 	return;
 }
 

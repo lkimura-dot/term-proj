@@ -1,7 +1,7 @@
 /*
  * File: college.c
  * Author: Lauren Kimura
- * Last updated: 2/22/2026
+ * Last updated: 3/6/2026
  * Description: has a main function that creates an array 
  *
  */
@@ -28,6 +28,6 @@ int main() {
         }
 		//searchAge(studentList, 20);
 		//deletion(studentList, 18);
-		maxAgeGap(studentList);
+		//maxAgeGap(studentList);
 		destroyDataSet(studentList);
 }

@@ -1,0 +1,10 @@
+Worst-case Big-O run time:
+
+createDataSet O(n) n is the number of max elements in array
+destroyDataSet O(n), n is the number of max elements in the array
+searchID O(1)
+Insertion O(1)
+Deletion O(1)
+
+
+I chose to use this data structure with a direct-table access table storing a student at each index because it allowed for easy insertion, deletion, and searching O(1) time complexity.Through this, since it si sorted base don ID number, I can directly access a student, even though it takes up a lot more storage.

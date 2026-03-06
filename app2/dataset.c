@@ -82,7 +82,7 @@ void destroyDataSet(LIST *lp)
  *
  * Worst Case: O(1)
  *
- * The searchAge function takes one lp and an Id as arguments. If there is not student with that id, it returns -1. Else, it prints the student's ID's and returns the id
+ * The searchID function takes one lp and an Id as arguments. If there is not student with that id, it returns -1. Else, it prints the student's ID's and returns the id
  *
  */
 int searchID(LIST *lp, int findId)

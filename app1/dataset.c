@@ -43,6 +43,16 @@ typedef struct list{
   int length;
 } LIST;
 
+
+/*
+ * Big-O: O(m) m is the differant types of ages in array
+ *
+ * Average: O(m)
+ *
+ * Worst case: O(m)
+ *
+ * The createDataSet function takes in the max array size called maxElts as an  argument. It creates the lp, setting studentCount to 0, the length of maxElts, and distributes memory to the array in lp that size of 13 (18-30). In the lp there is a list of AGES with a dummy head pointer. each node is a STUDENT that is doubly linked. It returns the list lp
+ */
 LIST *createDataSet(int maxElts)
 {
     LIST *lp= malloc(sizeof(LIST));
@@ -63,7 +73,16 @@ LIST *createDataSet(int maxElts)
 	return lp;
 }
 
-//o complexity: O(m)
+/*
+ * Big-O: O(m)
+ *
+ * Average: O(1)
+ *
+ * Worst case: O(1)
+ *
+ * The destroyQueue function takes in one pq as an argument. It free the data then frees the pointer iteself and returns nothing.
+ *
+ */
 void destroyDataSet(LIST *lp)
 {
 	for(int i = 0; i < 13; i++) {
@@ -80,14 +99,18 @@ void searchAge(LIST *lp, int age)
 	assert(lp != NULL);
 	int startingVal = age-18;
 	if (lp->array[startingVal]->count == 0) {
-		printf("No students of age: %d", age);
+		printf("No students of age: %d\n", age);
 		return;
 	}
-	printf("Students who are of age: %d", age);
-	for(int i = 0; i < lp->array[startingVal]->count; i++){
-		printf("Student Id: %d\n", lp->array[startingVal]->head->next->ID);
-	}
-	return;
+	printf("Students who are of age: %d\n", age);
+	STUDENT *curr = lp->array[startingVal]->head->next;
+	
+
+	while (curr != lp->array[startingVal]->head) {
+        printf("Student Id: %d\n", curr->ID);
+        curr = curr->next;
+    }
+		return;
 }
 
 void insertion(LIST *lp, int newID, int newAge)
@@ -132,15 +155,20 @@ void deletion (LIST *lp, int delAge)
 
 void maxAgeGap(LIST *lp)
 {
+	assert(lp != NULL);
 	int lowAge = 0;
-	int topAge = 13;
-	while (lp->array[lowAge]->count == 0) {
+	int topAge = 12;
+	while (lowAge < 13 && lp->array[lowAge]->count == 0) {
 		lowAge++;
 	}
-	while (lp->array[topAge]->count ==0) {
+	while (topAge >= 0 && lp->array[topAge]->count == 0) {
 		topAge--;
-	}
-	printf("thr age range is from %d and %d", lowAge+18, topAge+18);
+	}	
+	if (lowAge > topAge) {
+        printf("No students in dataset\n");
+        return;
+    }
+	printf("the age range is from %d and %d\n", lowAge+18, topAge+18);
 	assert(lp != NULL);
 	return;
 }

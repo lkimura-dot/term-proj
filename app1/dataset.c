@@ -48,7 +48,7 @@ typedef struct list{
 /*
  * Big-O: O(1) 
  *
- * Average: O(1)
+ * Average: O(1) constant because number 13 is constant
  *
  * Worst case: O(1)
  *
@@ -75,11 +75,11 @@ LIST *createDataSet(int maxElts)
 }
 
 /*
- * Big-O: O(m), m is the differant types of ages in array
+ * Big-O: O(n), n is the number of students
  *
- * Average: O(m)
+ * Average: O(n)
  *
- * Worst case: O(m)
+ * Worst case: O(n)
  *
  * The destroyDataSet function takes in one lq as an argument. It frees each of the age heads and AGES in the array, then frees the array itself, and finally the lp. This returns nothing.
  *
@@ -163,7 +163,7 @@ void insertion(LIST *lp, int newID, int newAge)
 }
 
 /*
- * Big-O: O(m), m is the differant types of ages in array 
+ * Big-O: O(m), m is the students in the doubly linked list 
  * 
  * Average: O(m)
  *

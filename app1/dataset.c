@@ -46,11 +46,11 @@ typedef struct list{
 
 
 /*
- * Big-O: O(m) m is the differant types of ages in array
+ * Big-O: O(1) 
  *
- * Average: O(m)
+ * Average: O(1)
  *
- * Worst case: O(m)
+ * Worst case: O(1)
  *
  * The createDataSet function takes in the max array size called maxElts as an  argument. It creates the lp, setting studentCount to 0, the length of maxElts, and distributes memory to the array in lp that size of 13 (18-30). In the lp there is a list of AGES with a dummy head pointer. each node is a STUDENT that is doubly linked. It returns the list lp
  */
@@ -86,9 +86,17 @@ LIST *createDataSet(int maxElts)
  */
 void destroyDataSet(LIST *lp)
 {
+	assert(lp != NULL);
 	for(int i = 0; i < 13; i++) {
-    free(lp->array[i]->head);
-    free(lp->array[i]); 
+		if(lp->array[i]->count > 0) {
+		STUDENT *nextStudent = lp->array[i]->head->next;
+		while (nextStudent != lp->array[i]->head){
+			STUDENT *curr = nextStudent;
+			nextStudent = nextStudent->next;
+			free(curr);
+		}
+		free(lp->array[i]); 
+		}
 	}
 	free(lp->array);
 	free(lp);
@@ -96,7 +104,7 @@ void destroyDataSet(LIST *lp)
 }
 
 /*
- * Big-O: O(m) m is the differant types of ages in array
+ * Big-O: O(m) m is the students in doubly linked array
  *
  * Average: O(m), getting age O(1), but returning each ID is O(m)
  *
@@ -172,7 +180,7 @@ void deletion (LIST *lp, int delAge)
 		return;
 	}
 	STUDENT *delete = lp->array[startingVal]->head->next;
-	printf("Students Deleted:\n");
+	printf("Students Deleted with the age %d:\n", delAge);
 	while (delete != lp->array[startingVal]->head) {
 		STUDENT *saveNext = delete->next; 
 		printf("Student Id: %d\n", delete->ID);
@@ -190,7 +198,7 @@ void deletion (LIST *lp, int delAge)
  *
  * Average: O(1)
  *
- * Worst Case: O(m) m is the differant types of ages in array (occurs if there is no students in array)
+ * Worst Case: O(1)
  *
  * The maxAgeGap function takes in one list of lp as arguments. It checks for the lowest age and the top age. then prints the range of the two. Ths returns nothing.
  */
